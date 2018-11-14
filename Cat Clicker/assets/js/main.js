@@ -87,11 +87,20 @@ window.onload = function () {
     /*-----------------------------------------------------*/
     /* ----- Page functionalities
     /*-----------------------------------------------------*/
+    
     let topBtn = document.querySelector('.js_goTopButton');
-
-    topBtn.addEventListener('mouseover', function() {
-        this.classList.add('scroll-top-anim');
-    });
+    
+    // Check if user has scrolled down
+    window.onscroll = function() {
+        let d = document.documentElement;
+        let offset = d.scrollTop + window.innerHeight;
+        let height = d.offsetHeight;
+      
+        if (offset === height) {
+            console.log('At the bottom');
+            topBtn.classList.add('scroll-top-anim');
+        }
+      };
 
     topBtn.addEventListener('click', function() {
         window.scrollTo(0, 0);
