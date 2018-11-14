@@ -2,8 +2,10 @@
 /* ----- Vanilla JS Solution
 /*-----------------------------------------------------*/
 window.onload = function () {
-
-    // Store cats in an object
+    
+    /*-----------------------------------------------------*/
+    /* ----- Cats Object
+    /*-----------------------------------------------------*/
     let cats = [
         {
             name: 'Maru',
@@ -36,47 +38,68 @@ window.onload = function () {
             clicks: 0
         }
     ];
-
+    /*-----------------------------------------------------*/
+    
+    /*-----------------------------------------------------*/
+    /* ----- Pictures List + their functionalities
+    /*-----------------------------------------------------*/
     let catsBody = document.querySelector('.js_cats');
     let img = document.querySelector('.js_mainCatImg');
     let info = document.querySelector('.js_mainCatText');    
-
+    
     for (let x in cats) {
-
+        
         let cat = cats[x];
         let catFig = document.createElement('figure');
         catFig.classList.add('cats__fig');
-
+        
         catFig.innerHTML = `
         <div class="cats__img-wrapper">
-            <img class="cats__img js_catImg" src="${cat.url}" alt="${cat.alt}">
+        <img class="cats__img js_catImg" src="${cat.url}" alt="${cat.alt}">
         </div>
         <div class="cats__caption-wrapper">
-            <figcaption class="cats__figcap">
-                Name: <span class="cats__name js_catName">&nbsp;${cat.name}</span>&nbsp;|&nbsp;Clicks:&nbsp;<span class="cats__clicks js_catClicks">${cat.clicks}</span>
-            </figcaption>
+        <figcaption class="cats__figcap">
+        Name: <span class="cats__name js_catName">&nbsp;${cat.name}</span>&nbsp;|&nbsp;Clicks:&nbsp;<span class="cats__clicks js_catClicks">${cat.clicks}</span>
+        </figcaption>
         </div>
         `;
-
+        
         catsBody.appendChild(catFig);
         img.style.backgroundImage = 'url(' + cat.url + ')';
         info.innerHTML = 'Hi there, I\'m ' + cat.name + ' | My clicks: ' + cat.clicks + ' Meow!';
-
+        
         catFig.addEventListener('click', (function (catIndex) {
             let cat = catIndex[x];
             let clicks = document.querySelectorAll('.js_catClicks');
-
+            
             return function () {
                 cat.clicks++;
                 clicks[x].innerHTML = cat.clicks;
                 img.style.backgroundImage = 'url(' + cat.url + ')';
                 info.innerHTML = 'Hi there, I\'m ' + cat.name + ' | My clicks: ' + cat.clicks + ' Meow!';
-                window.scrollTo(0, 0);
             };
         })(cats));
         
     }
+    /*-----------------------------------------------------*/
+    
+    /*-----------------------------------------------------*/
+    /* ----- Page functionalities
+    /*-----------------------------------------------------*/
+    let topBtn = document.querySelector('.js_goTopButton');
+
+    topBtn.addEventListener('mouseover', function() {
+        this.classList.add('scroll-top-anim');
+    });
+
+    topBtn.addEventListener('click', function() {
+        window.scrollTo(0, 0);
+        this.classList.remove('scroll-top-anim');
+    });
+    /*-----------------------------------------------------*/
 }
+/*-----------------------------------------------------*/
+
 
 /*-----------------------------------------------------*/
 /* ----- jQuery Solution
