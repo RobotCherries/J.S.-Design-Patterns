@@ -51,7 +51,12 @@ window.onload = function () {
         
         let cat = cats[x];
         let catFig = document.createElement('figure');
-        catFig.classList.add('cats__fig');
+        
+        if(x % 2 === 0) {
+            catFig.classList.add('cats__fig', 'cats__fig--left');
+        } else {
+            catFig.classList.add('cats__fig', 'cats__fig--right');
+        }
         
         catFig.innerHTML = `
         <div class="cats__img-wrapper">
@@ -88,7 +93,7 @@ window.onload = function () {
     /* ----- Page functionalities
     /*-----------------------------------------------------*/
     
-    let topBtn = document.querySelector('.js_goTopButton');
+    let topBtn = document.querySelector('.js_scrollTopButton');
     
     // Check if user has scrolled down
     window.onscroll = function() {
@@ -98,13 +103,13 @@ window.onload = function () {
       
         if (offset === height) {
             console.log('At the bottom');
-            topBtn.classList.add('scroll-top-anim');
+            topBtn.classList.add('anim-scroll-top');
         }
       };
 
     topBtn.addEventListener('click', function() {
         window.scrollTo(0, 0);
-        this.classList.remove('scroll-top-anim');
+        this.classList.remove('anim-scroll-top');
     });
     /*-----------------------------------------------------*/
 }
