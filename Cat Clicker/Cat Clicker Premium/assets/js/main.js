@@ -243,20 +243,13 @@ window.onload = function() {
                 let d = document.documentElement;
                 let offset = d.scrollTop + window.innerHeight;
                 let height = d.offsetHeight;
-                
                 // console.log(offset + ' ' + innerHeight);
                 
-                // Hide the button if it's already the top of the page
-                if(offset >= 1300) {
-                    topBtn.style.display = 'block';
-                    if (offset === height) {
-                        console.log('At the bottom');
-                        topBtn.classList.add('anim-scroll-top');
-                    }
-                } else {
-                    topBtn.style.display = 'none';
+                if (offset === height) {
+                    console.log('At the bottom');
+                    topBtn.classList.add('anim-scroll-top');
                 }
-                };
+            };
         
             // On click scroll to the top of the page
             topBtn.addEventListener('click', () => {
