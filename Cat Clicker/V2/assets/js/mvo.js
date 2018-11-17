@@ -93,7 +93,8 @@ $(function() {
         render: () => {
             let catsBody = document.querySelector('.js_cats');
             let img = document.querySelector('.js_mainCatImg');
-            let info = document.querySelector('.js_mainCatText');    
+            let mainCatName = document.querySelector('.js_mainCatName');    
+            let mainCatClicks = document.querySelector('.js_mainCatClicks');    
             
             let catsList = octopus.getCatList();
 
@@ -131,7 +132,8 @@ $(function() {
                 // Selected Cat
                 catsBody.appendChild(catFig);
                 img.style.backgroundImage = 'url(' + cat.url + ')';
-                info.innerHTML = 'Hi there, I\'m ' + cat.name + ' | My clicks: ' + cat.clicks + ' Meow!';
+                mainCatName.textContent = cat.name;
+                mainCatClicks.textContent = cat.clicks;
                 
                 // On click get cat's index
                 catFig.addEventListener('click', (function (catIndex) {
@@ -146,7 +148,8 @@ $(function() {
                         localStorage.setItem('cats', JSON.stringify(catsList));
                         // And replace selected cat's info with the clicked one
                         img.style.backgroundImage = 'url(' + cat.url + ')';
-                        info.innerHTML = 'Hi there, I\'m ' + cat.name + ' | My clicks: ' + cat.clicks + ' Meow!';
+                        mainCatName.textContent = cat.name;
+                        mainCatClicks.textContent = cat.clicks;
                     };
                 })(catsList));
             }

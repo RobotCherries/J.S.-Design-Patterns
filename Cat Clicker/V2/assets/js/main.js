@@ -69,7 +69,8 @@ window.onload = function () {
     /*-----------------------------------------------------*/
     let catsBody = document.querySelector('.js_cats');
     let img = document.querySelector('.js_mainCatImg');
-    let info = document.querySelector('.js_mainCatText');    
+    let mainCatName = document.querySelector('.js_mainCatName');    
+    let mainCatClicks = document.querySelector('.js_mainCatClicks');  
     
     for (let x in cats) {
         
@@ -102,7 +103,8 @@ window.onload = function () {
         // Main Cat
         catsBody.appendChild(catFig);
         img.style.backgroundImage = 'url(' + cat.url + ')';
-        info.innerHTML = 'Hi there, I\'m ' + cat.name + ' | My clicks: ' + cat.clicks + ' Meow!';
+        mainCatName.textContent = cat.name;
+        mainCatClicks.textContent = cat.clicks;
         
         catFig.addEventListener('click', (function (catIndex) {
             let cat = catIndex[x];
@@ -112,7 +114,8 @@ window.onload = function () {
                 cat.clicks++;
                 clicks[x].innerHTML = cat.clicks;
                 img.style.backgroundImage = 'url(' + cat.url + ')';
-                info.innerHTML = 'Hi there, I\'m ' + cat.name + ' | My clicks: ' + cat.clicks + ' Meow!';
+                mainCatName.textContent = cat.name;
+                mainCatClicks.textContent = cat.clicks;
             };
         })(cats));
         
