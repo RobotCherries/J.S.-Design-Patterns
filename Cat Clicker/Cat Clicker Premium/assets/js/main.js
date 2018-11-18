@@ -108,6 +108,7 @@ window.onload = function() {
             // tell our views to initialize
             model.init();
             catView.init();
+            adminBoard.init();
             catListView.init();
         },
     
@@ -133,6 +134,14 @@ window.onload = function() {
             model.isChanged(model.changed);
             catListView.render();
             catView.render();
+        },
+        
+        addCat: function(newObj) {
+            model.cats.push(newObj);
+            model.changed = true;
+            model.isChanged(model.changed);
+            catListView.render();
+            alert('The cat was successfully added');
         }
     }
     
@@ -159,12 +168,58 @@ window.onload = function() {
         render: function() {
             // update the DOM elements with the values from the current cat
             var currentCat = octopus.getCurrentCat();
-            this.mainCatImg.style.backgroundImage = 'url(' + currentCat.url + ')';
+            this.mainCatImg.style.backgroundImage = 'url("' + currentCat.url + '")';
             this.mainCatName.textContent = currentCat.name;
-            this.mainCatName.textContent = currentCat.clicks;
-        },
+            this.mainCatClicks.textContent = currentCat.clicks;
+        }
     }
+
+
+    // Add a Cat Form
+    var adminBoard = {
+        init: function() {
+            this.adminButton = document.querySelector('.js_adminButton');
+            this.adminArea = document.querySelector('.js_adminArea');
+            
+            this.render();
+            this.form();
+        },
+        
+        render: function() {
+            let admin = this.adminArea;
+            
+            // On navbar button click diaplay the admin board
+            this.adminButton.addEventListener('click', function() {
+                let pass = prompt('Type your admin password. (The password is catpass)');
+                if(pass === 'catpass') {
+                    admin.classList.toggle('hidden');
+                } else {
+                    alert('You ain\'t no admin. Check you priviledges!');
+                }
+            });
+        },
+        
+        form: function() {
+            let admin = this.adminArea;
+            let btn = document.querySelector('.js_catFormBtn');
+
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                let nameVal = document.getElementsByName('cat_name')[0].value;
+                let urlVal = document.getElementsByName('cat_url')[0].value;
     
+                let newCat = {
+                    name: nameVal,
+                    url: urlVal,
+                    alt: '',
+                    clicks: 0
+                }
+                
+                octopus.addCat(newCat);
+                admin.classList.toggle('hidden');
+            });
+        }
+    }
     
     
     // List of Cats
@@ -175,8 +230,8 @@ window.onload = function() {
             this.catListBlock = document.querySelector('.js_catsUl');
     
             // render this view (update the DOM elements with the right values)
-            catListView.render();
-            catListView.scrollButton();
+            this.render();
+            this.scrollButton();
         },
     
         render: function() {
