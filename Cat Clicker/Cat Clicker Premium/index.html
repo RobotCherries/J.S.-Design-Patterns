@@ -18,7 +18,7 @@
                 <nav class="header__nav">
                     <ul class="header__nav-ul">
                         <li class="header__nav-li"><a class="header__nav-link" href="#cat-list">The Cats</a></li>
-                        <li class="header__nav-li"><a class="header__nav-link js_adminButton" href="#">Admin</a></li>
+                        <li class="header__nav-li"><a class="header__nav-link js_adminBtn" href="#">Admin</a></li>
                         <li class="header__nav-li"><a class="header__nav-link" href="#footer">About</a></li>
                     </ul>
                 </nav>
@@ -41,17 +41,18 @@
                 </div>
             </div>
             <!-- Add Cat Form Block -->
-            <div class="add-cat hidden js_adminArea">
+            <div class="admin-panel hidden js_adminPanel">
                 <div class="wrapper">
-                    <h1 class="add-cat__title">Admin Board: Add Cat</h1>
+                    <h1 class="admin-panel__title">Admin Board: Add Cat</h1>
+                    <div class="admin-panel__exit js_adminPanelExitBtn">Exit</div>
                     <form class="cat-form" method="post">
                         <fieldset class="cat-form__fieldset">
                             <label class="cat-form__label" for="cat_name">Cat name:</label>
-                            <input class="cat-form__input" type="text" name="cat_name">
+                            <input class="cat-form__input" type="text" name="cat_name" required>
                         </fieldset>
                         <fieldset class="cat-form__fieldset">
                             <label class="cat-form__label" for="cat_url">Cat image url:</label>
-                            <input class="cat-form__input" type="text" name="cat_url">
+                            <input class="cat-form__input" type="text" name="cat_url" required>
                         </fieldset>
                         <input class="cat-form__submit js_catFormBtn" type="submit" value="Add">
                     </form>
@@ -63,8 +64,8 @@
                     <!-- Populated via J.S. -->
                 </ul>
             </div>
-            <!-- Scroll to Top Button -->
-            <div class="scroll-top-button js_scrollTopButton">&#9757;</div>
+            <!-- Scroll to Top Btn -->
+            <div class="scroll-top-button js_scrollTopBtn">&#9757;</div>
         </main>
         <!-- Footer -->
         <footer id="footer" class="footer">

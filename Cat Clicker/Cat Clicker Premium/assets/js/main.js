@@ -178,45 +178,58 @@ window.onload = function() {
     // Add a Cat Form
     var adminBoard = {
         init: function() {
-            this.adminButton = document.querySelector('.js_adminButton');
-            this.adminArea = document.querySelector('.js_adminArea');
+            this.adminPanel = document.querySelector('.js_adminPanel');
+            this.adminPanelExitBtn = document.querySelector('.js_adminPanelExitBtn');
+            this.adminBtn = document.querySelector('.js_adminBtn');
             
             this.render();
             this.form();
         },
         
         render: function() {
-            let admin = this.adminArea;
+            let admin = this.adminPanel;
             
             // On navbar button click diaplay the admin board
-            this.adminButton.addEventListener('click', function() {
-                let pass = prompt('Type your admin password. (The password is catpass)');
-                if(pass === 'catpass') {
+            this.adminBtn.addEventListener('click', function() {
+                let pass = prompt('Type your admin password. (The password is pass)');
+                if(pass === 'pass') {
                     admin.classList.toggle('hidden');
                 } else {
-                    alert('You ain\'t no admin. Check you priviledges!');
+                    alert('You ain\'t no admin, check you priviledges!');
                 }
+            });
+            
+            // Exit button
+            this.adminPanelExitBtn.addEventListener('click', function() {
+                admin.classList.toggle('hidden');
             });
         },
         
         form: function() {
-            let admin = this.adminArea;
-            let btn = document.querySelector('.js_catFormBtn');
+            let admin = this.adminPanel;
+            let addBtn = document.querySelector('.js_catFormBtn');
 
-            btn.addEventListener('click', function(e) {
+            // Add button
+            addBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 let nameVal = document.getElementsByName('cat_name')[0].value;
                 let urlVal = document.getElementsByName('cat_url')[0].value;
     
-                let newCat = {
-                    name: nameVal,
-                    url: urlVal,
-                    alt: '',
-                    clicks: 0
+                if(nameVal !== '' && urlVal !== '') {
+                    let newCat = {
+                        name: nameVal,
+                        url: urlVal,
+                        alt: '',
+                        clicks: 0
+                    }
+                    
+                    octopus.addCat(newCat);
+                    admin.classList.toggle('hidden');
+                } else {
+                    if(!confirm('Please enter the required name and url for the new cat.')) {
+                        admin.classList.toggle('hidden');
+                    }
                 }
-                
-                octopus.addCat(newCat);
-                admin.classList.toggle('hidden');
             });
         }
     }
@@ -231,7 +244,7 @@ window.onload = function() {
     
             // render this view (update the DOM elements with the right values)
             this.render();
-            this.scrollButton();
+            this.scrollBtn();
         },
     
         render: function() {
@@ -290,8 +303,8 @@ window.onload = function() {
             }
         },
         
-        scrollButton: function() {
-            let topBtn = document.querySelector('.js_scrollTopButton');
+        scrollBtn: function() {
+            let topBtn = document.querySelector('.js_scrollTopBtn');
     
             // Check if user has scrolled down
             window.onscroll = function() {
