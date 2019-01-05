@@ -1,7 +1,0 @@
-{
-    "emmet.includeLanguages": {
-        "javascript": "javascriptreact",
-        "vue-html": "html"
-    },
-    "python.pythonPath": "C:\\Program Files\\Python37\\python.exe"
-}
